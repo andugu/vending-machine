@@ -3,7 +3,7 @@ import {Navigate} from 'react-router-dom';
 
 import {Products} from "../components/product";
 import {Wallet} from "../components/wallet";
-import {Divider, Stack} from "@mui/material";
+import Grid from "@mui/material/Grid";
 
 
 export const VendingMachine: FC = () => {
@@ -14,9 +14,13 @@ export const VendingMachine: FC = () => {
 	}
 
 	return (
-		<Stack direction="row" justifyContent="space-between" alignItems="center" spacing={2} divider={<Divider orientation="vertical" flexItem />}>
-			<Products />
-			<Wallet name={"Josep Maria Olivé"} balance={0}/>
-		</Stack>
+		<Grid container spacing={2}>
+			<Grid item xs={6}>
+				<Products />
+			</Grid>
+			<Grid item xs={6}>
+				<Wallet name={"Josep Maria Olivé"} balance={0}/>
+			</Grid>
+		</Grid>
 	)
 }
