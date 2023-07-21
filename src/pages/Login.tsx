@@ -1,15 +1,16 @@
 import {FC} from 'react';
 import {Navigate} from 'react-router-dom';
 
+import {Login} from "../components/login";
 
-export const Login: FC = () => {
+export const LoginPage: FC = () => {
 
-	const user = true; // TODO connect to the redux store and retrieve the user name
+	const user = false; // TODO connect to the redux store and retrieve the user name
 
 	// if user, no need to login again, redirect to vending machine home
   if (user) {
 		return <Navigate to='/vending-machine' />
 	}
 
-	return <>Welcome to the login page!</>
+	return <Login />
 }
