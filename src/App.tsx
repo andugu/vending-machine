@@ -10,7 +10,7 @@ import Box from "@mui/material/Box";
 
 function App() {
   return (
-	  <Box sx={{padding: 2}}>
+	  <Box>
 		<BrowserRouter>
 	    <Routes>
 	      <Route path="/" element={<LoginPage/>} />
