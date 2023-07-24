@@ -1,11 +1,8 @@
-import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Grid from "@mui/material/Grid";
 
-interface UserProps {
-	name: string;
-	balance: number;
-}
+import {UserProps} from "../types";
+import {BlueButton, LargeGreenButton} from "./common";
 
 const RechargeOptions = {
 	"0,10€": 0.1,
@@ -17,26 +14,20 @@ const RechargeOptions = {
 }
 
 
-export const Wallet = ({ name, balance }: UserProps) => {
+export const Wallet = ({user_name, full_name, balance}: UserProps) => {
 	return (
 		<Box sx={{backgroundColor: '#334d5c', borderRadius: 4}}>
 			<Box sx={{m: 2, paddingY: 2}}>
 				<Box sx={{backgroundColor: '#d5d5d5', p: 1, borderRadius: 2}}>
-					<Box sx={{textAlign: 'right', fontSize: 20}}><b>{name}</b></Box>
+					<Box sx={{textAlign: 'right', fontSize: 20}}><b>{full_name}</b></Box>
 				</Box>
 				<Box sx={{backgroundColor: '#d5d5d5', mt: 3, paddingY: 3, paddingX: '10%', borderRadius: 2}}>
 					<Box sx={{mb: 2}}><b>Add money</b></Box>
 					<Grid container wrap="wrap" rowSpacing={4} columnSpacing={{xs: 1, sm: 3, md: 3}}>
 						{Object.keys(RechargeOptions).map((option) => (
 							<Grid item sm={6} md={4}>
-								<Box sx={{p: 1, m:1, display: 'flex', justifyContent: 'center'}}>
-									<Button size='large' sx={{
-										backgroundColor: '#1e5d88',
-										color: 'white',
-										display: 'block',
-										width: '100%',
-										'&:hover': {backgroundColor: '#334d5c'}
-									}}>{option}</Button>
+								<Box sx={{p: 1, m:1}}>
+									{BlueButton(option, 'large')}
 								</Box>
 							</Grid>
 						))}
@@ -47,16 +38,8 @@ export const Wallet = ({ name, balance }: UserProps) => {
 						<b>Balance: {balance}€</b>
 					</Box>
 				</Box>
-				<Box sx={{backgroundColor: '#d5d5d5', mt: 3,  borderRadius: 2}}>
-					<Box sx={{textAlign: 'center', fontSize: 30}}>
-						<Button size='large' sx={{
-							backgroundColor: '#55ad7a',
-							color: 'white',
-							display: 'block',
-							width: '100%',
-							'&:hover': {backgroundColor: '#50ad7a'}
-						}}>Refund money</Button>
-					</Box>
+				<Box sx={{mt: 3}}>
+					{LargeGreenButton("Refund money")}
 				</Box>
 			</Box>
 		</Box>
