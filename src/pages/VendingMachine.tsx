@@ -19,7 +19,7 @@ export const VendingMachine: FC = () => {
 				<Products />
 			</Grid>
 			<Grid item xs={6}>
-				<Wallet name={"Josep Maria Olivé"} balance={0}/>
+				<Wallet user_name={"Goatsep"} full_name={"Josep Maria Olivé"} balance={0}/>
 			</Grid>
 		</Grid>
 	)
