@@ -1,21 +1,19 @@
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
+import {FC, useEffect, useState} from 'react';
 
+import {api} from "../api";
+import {ProductProps} from "../types";
+import {MainMessage, MessageColorByType} from "./common";
 
-interface ProductProps {
-	name: string;
-	stock: number;
-	price: number;
-}
-
-const Product = ({ name, stock, price }: ProductProps) => {
+const Product = ({ id, name, quantity, price }: ProductProps) => {
 	return (
 		<Box>
 			<Box sx={{backgroundColor: '#d5d5d5', p: 1, m:1, borderRadius: 2}}>
 				<Box sx={{p: 1}}>
 					<Box sx={{fontSize: 21}}><b>{name}</b></Box>
-					<Box sx={{p: 1}}>{`Stock: ${stock}`}</Box>
+					<Box sx={{p: 1}}>{`Stock: ${quantity}`}</Box>
 					<Box sx={{p: 1}}>{`Price: ${price}€`}</Box>
 				</Box>
 			</Box>
@@ -32,41 +30,44 @@ const Product = ({ name, stock, price }: ProductProps) => {
 	)
 };
 
-export const Products = () => {
-	const get_products = (): ProductProps[] => {
-		// TODO: Replace by real call
-		return [
-			{name: "Redbull", stock: 4, price: 5},
-			{name: "Fanta", stock: 4, price: 5},
-			{name: "Coca Cola Zero", stock: 4, price: 5000},
-			{name: "Oreo cookies", stock: 3, price: 5000},
-			{name: "Coca Cola", stock: 4, price: 10000},
-			{name: "Redbull", stock: 4, price: 5},
-			{name: "Fanta", stock: 4, price: 5},
-			{name: "Coca Cola Zero", stock: 4, price: 5000},
-			{name: "Oreo cookies", stock: 3, price: 5000},
-			{name: "Coca Cola", stock: 4, price: 10000},
-			{name: "Redbull", stock: 4, price: 5},
-			{name: "Fanta", stock: 4, price: 5},
-			{name: "Coca Cola Zero", stock: 4, price: 5000},
-			{name: "Oreo cookies", stock: 3, price: 5000},
-			{name: "Coca Cola", stock: 4, price: 10000},
-		]
+export const Products: FC = () => {
+	const [products, setProducts] = useState<ProductProps[] | null>(null);
+	const [error, setError] = useState<string | null>(null);
+
+	const fetchProducts = async () => {
+		try {
+			let products_list = await api.getProducts();
+			setProducts(products_list);
+		} catch (error) {
+			setError(`An error occurred while loading products: ${error}`);
+		}
 	};
 
-	return (
-		<Box sx={{
-			backgroundColor: '#334d5c',
-			padding: 2,
-			borderRadius: 4,
-		}}>
-			<Grid container rowSpacing={4} columnSpacing={{xs: 1, sm: 1, md: 3}}>
-				{get_products().map( (product: ProductProps) => (
-					<Grid item xs={6} sm={4}>
-						<Product name={product.name} stock={product.stock} price={product.price} />
-					</Grid>
-				))}
-			</Grid>
-		</Box>
-	)
+	useEffect(() => {
+		if (products == null) {
+			fetchProducts();
+		}
+	});
+
+	if (error) {
+		return MainMessage(error, MessageColorByType.ERROR);
+	} else if (products != null) {
+		return (
+			<Box sx={{
+				backgroundColor: '#334d5c',
+				padding: 2,
+				borderRadius: 4,
+			}}>
+				<Grid container rowSpacing={4} columnSpacing={{xs: 1, sm: 1, md: 3}}>
+					{products.map( (product: ProductProps) => (
+						<Grid item xs={6} sm={4}>
+							<Product id={product.id} name={product.name} quantity={product.quantity} price={product.price} />
+						</Grid>
+					))}
+				</Grid>
+			</Box>
+		)
+	} else {
+		return MainMessage("Loading products...", MessageColorByType.NOTICE);
+	}
 };
