@@ -1,11 +1,10 @@
-import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import {FC, useEffect, useState} from 'react';
 
 import {api} from "../api";
 import {ProductProps} from "../types";
-import {MainMessage, MessageColorByType} from "./common";
+import {BlueButton, MainMessage, MessageColorByType} from "./common";
 
 const Product = ({ id, name, quantity, price }: ProductProps) => {
 	return (
@@ -17,14 +16,8 @@ const Product = ({ id, name, quantity, price }: ProductProps) => {
 					<Box sx={{p: 1}}>{`Price: ${price}€`}</Box>
 				</Box>
 			</Box>
-			<Box sx={{p: 1, m:1, display: 'flex', justifyContent: 'center'}}>
-				<Button sx={{
-					backgroundColor: '#1e5d88',
-					color: 'white',
-					display: 'block',
-					width: '100%',
-					'&:hover': {backgroundColor: '#334d5c'}
-				}}>Buy</Button>
+			<Box sx={{p: 1, m:1}}>
+				{BlueButton("Buy")}
 			</Box>
 		</Box>
 	)
@@ -56,6 +49,7 @@ export const Products: FC = () => {
 			<Box sx={{
 				backgroundColor: '#334d5c',
 				padding: 2,
+				mt: 1,
 				borderRadius: 4,
 			}}>
 				<Grid container rowSpacing={4} columnSpacing={{xs: 1, sm: 1, md: 3}}>
