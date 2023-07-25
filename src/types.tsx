@@ -10,3 +10,7 @@ export interface ProductProps {
     quantity: number;
     price: number;
 }
+
+export interface RechargeOptionsType {
+  [key: string]: number;
+}
