@@ -8,7 +8,7 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 
 import {LargeGreenButton, MainMessage, MessageColorByType} from "./common";
 import {api} from "../api";
-import { setUserName, setFullName, updateBalance} from "../redux/walletSlice";
+import { setUserId, setUserName, updateBalance} from "../redux/walletSlice";
 
 
 export const Login = () => {
@@ -21,8 +21,8 @@ export const Login = () => {
 	const fetchUserInfo = async () => {
 		try {
 			let user = await api.getUser(textFieldValue);
+			dispatch(setUserId(user.id));
 			dispatch(setUserName(user.user_name));
-			dispatch(setFullName(user.full_name));
 			dispatch(updateBalance(user.balance));
 		} catch (error) {
 			setError(`An error occurred on log in: ${error}\nPlease, refresh the page and try again.`);

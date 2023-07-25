@@ -17,8 +17,8 @@
     {"id": "product-15", "name": "Coca Cola", "quantity": "4", "price": "10000"}
   ],
   "login": {
-    "user_name": "goatsep",
-    "full_name": "Josep Maria Olive Fernandez",
+    "id": "100",
+    "user_name": "Josep Maria Olive Fernandez",
     "balance": 23
   }
 }

@@ -1,6 +1,6 @@
 export interface UserProps {
+    id: string | null;
     user_name: string | null;
-    full_name: string | null;
     balance: number | null;
 }
 
