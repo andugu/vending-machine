@@ -9,5 +9,5 @@ To start the application.
 ### `npm test`
 To launch the test runner in the interactive watch mode.
 
-### `src/mocks/runMockServer.sh`
+### `node src/mocks/server.js`
 To start a mocked backend server for testing purposes.
