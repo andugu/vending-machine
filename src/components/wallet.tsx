@@ -45,6 +45,9 @@ export const Wallet = () => {
 				<Box sx={{mt: 3}}>
 					{LargeGreenButton("Refund money")}
 				</Box>
+				<Box sx={{mt: 3}}>
+					{LargeDarkBlueButton("Logout")}
+				</Box>
 			</Box>
 		</Box>
 	)

@@ -29,6 +29,18 @@ export const LargeGreenButton = (text: string, handleClick = () => {}) => {
 	)
 }
 
+export const LargeDarkBlueButton = (text: string, handleClick = () => {}) => {
+	return (
+		<Button size='large' onClick={handleClick} sx={{
+			backgroundColor: '#23292e',
+			color: 'white',
+			display: 'block',
+			width: '100%',
+			'&:hover': {backgroundColor: '#191d21'}
+		}}>{text}</Button>
+	)
+}
+
 export const LargeBlueButton = (text: string, handleClick = () => {}) => {
 	return (
 		<Button size='large' onClick={handleClick} sx={{
