@@ -1,7 +1,7 @@
 export interface UserProps {
-    user_name: string;
-    full_name: string;
-    balance: number;
+    user_name: string | null;
+    full_name: string | null;
+    balance: number | null;
 }
 
 export interface ProductProps {
