@@ -37,7 +37,7 @@ export const Products: FC = () => {
 	};
 
 	useEffect(() => {
-		if (products == null) {
+		if (products === null) {
 			fetchProducts();
 		}
 	});
