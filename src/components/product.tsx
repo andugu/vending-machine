@@ -4,7 +4,7 @@ import {FC, useEffect, useState} from 'react';
 
 import {api} from "../api";
 import {ProductProps} from "../types";
-import {BlueButton, MainMessage, MessageColorByType} from "./common";
+import {LargeBlueButton, MainMessage, MessageColorByType} from "./common";
 
 const Product = ({ id, name, quantity, price }: ProductProps) => {
 	return (
@@ -17,7 +17,7 @@ const Product = ({ id, name, quantity, price }: ProductProps) => {
 				</Box>
 			</Box>
 			<Box sx={{p: 1, m:1}}>
-				{BlueButton("Buy")}
+				{LargeBlueButton("Buy")}
 			</Box>
 		</Box>
 	)

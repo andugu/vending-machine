@@ -3,7 +3,7 @@ import Grid from "@mui/material/Grid";
 import {useSelector} from "react-redux";
 
 import {RootState} from "../store";
-import {BlueButton, LargeGreenButton} from "./common";
+import {LargeBlueButton, LargeGreenButton} from "./common";
 
 const RechargeOptions = {
 	"0,10€": 0.1,
@@ -31,7 +31,7 @@ export const Wallet = () => {
 						{Object.keys(RechargeOptions).map((option) => (
 							<Grid item sm={6} md={4}>
 								<Box sx={{p: 1, m:1}}>
-									{BlueButton(option, 'large')}
+									{LargeBlueButton(option)}
 								</Box>
 							</Grid>
 						))}

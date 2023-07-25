@@ -29,10 +29,9 @@ export const LargeGreenButton = (text: string, handleClick = () => {}) => {
 	)
 }
 
-export const BlueButton = (text: string, size: string = 'medium') => {
+export const LargeBlueButton = (text: string, handleClick = () => {}) => {
 	return (
-		<Button sx={{
-			size: {size},
+		<Button size='large' onClick={handleClick} sx={{
 			backgroundColor: '#1e5d88',
 			color: 'white',
 			display: 'block',
