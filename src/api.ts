@@ -11,6 +11,13 @@ export const api = {
             throw Error("Unable to create or recover user from API.")
         }
     },
+    logout: async (): Promise<void> => {
+        try {
+            await Axios.get(process.env.REACT_APP_BACKEND_URL + '/logout');
+        } catch (error) {
+            throw Error("Unable to logout.")
+        }
+    },
     getProducts: async (): Promise<ProductProps[]> => {
         try {
             const response = await Axios.get(process.env.REACT_APP_BACKEND_URL + '/products');
