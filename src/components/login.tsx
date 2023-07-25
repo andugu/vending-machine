@@ -20,7 +20,7 @@ export const Login = () => {
 	};
 	const fetchUserInfo = async () => {
 		try {
-			let user = await api.getUser(textFieldValue);
+			let user = await api.login(textFieldValue);
 			dispatch(setUserId(user.id));
 			dispatch(setUserName(user.user_name));
 			dispatch(updateBalance(user.balance));
