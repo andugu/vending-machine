@@ -1,13 +1,41 @@
+import React, {useState} from "react";
 import {Navigate} from 'react-router-dom';
-
+import {useDispatch} from "react-redux";
 import Box from "@mui/material/Box";
 import {InputAdornment, TextField} from "@mui/material";
 import Stack from '@mui/material/Stack';
 import AccountCircle from '@mui/icons-material/AccountCircle';
-import {LargeGreenButton} from "./common";
+
+import {LargeGreenButton, MainMessage, MessageColorByType} from "./common";
+import {api} from "../api";
+import { setUserName, setFullName, updateBalance} from "../redux/walletSlice";
+
 
 export const Login = () => {
+	const [textFieldValue, setTextFieldValue] = useState<string>('');
+	const [error, setError] = useState<string | null>(null);
+	const dispatch = useDispatch()
+	const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setTextFieldValue(event.target.value);
+	};
+	const fetchUserInfo = async () => {
+		try {
+			let user = await api.getUser(textFieldValue);
+			dispatch(setUserName(user.user_name));
+			dispatch(setFullName(user.full_name));
+			dispatch(updateBalance(user.balance));
+		} catch (error) {
+			setError(`An error occurred on log in: ${error}\nPlease, refresh the page and try again.`);
+		}
+	};
 
+	const handleSubmitClick = () => {
+		fetchUserInfo();
+		return <Navigate to='/products' />
+	};
+	if (error) {
+		return MainMessage(error, MessageColorByType.ERROR);
+	}
 	return (
 		<Box sx={{
 			display: 'flex',
@@ -25,6 +53,9 @@ export const Login = () => {
 							id="outlined-basic"
 							label="User"
 							variant="outlined"
+							value={textFieldValue}
+							onChange={handleInputChange}
+							onKeyPress={(event: React.KeyboardEvent<HTMLDivElement>) => {if (event.key === 'Enter'){handleSubmitClick()}}}
 							InputProps={{
 								startAdornment: (
 									<InputAdornment position="start">
@@ -35,7 +66,7 @@ export const Login = () => {
 						/>
 					</Box>
 					<Box>
-						{LargeGreenButton("Submit")}
+						{LargeGreenButton("Submit", handleSubmitClick)}
 					</Box>
 				</Stack>
 			</Box>
