@@ -2,7 +2,6 @@ import Axios from "axios"
 
 import {ProductProps, UserProps} from "./types";
 
-
 export const api = {
     getUser: async (user_name: string): Promise<UserProps> => {
         try {
