@@ -1,7 +1,8 @@
 import Box from '@mui/material/Box';
 import Grid from "@mui/material/Grid";
+import {useSelector} from "react-redux";
 
-import {UserProps} from "../types";
+import {RootState} from "../store";
 import {BlueButton, LargeGreenButton} from "./common";
 
 const RechargeOptions = {
@@ -13,8 +14,11 @@ const RechargeOptions = {
 	"5€": 5
 }
 
+export const Wallet = () => {
+	const user_name: string | null = useSelector((state: RootState) => state.wallet.user_name)
+	const full_name: string | null = useSelector((state: RootState) => state.wallet.full_name)
+	let balance: number | null = useSelector((state: RootState) => state.wallet.balance)
 
-export const Wallet = ({user_name, full_name, balance}: UserProps) => {
 	return (
 		<Box sx={{backgroundColor: '#334d5c', borderRadius: 4}}>
 			<Box sx={{m: 2, paddingY: 2}}>
