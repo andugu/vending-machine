@@ -18,5 +18,12 @@ export const api = {
         } catch (error) {
             throw Error("Unable to recover products from API.")
         }
+    },
+    patchBalance: async (user_id: string, new_balance: number): Promise<void> => {
+        try {
+            await Axios.patch(process.env.REACT_APP_BACKEND_URL + `/profile?id=${user_id}`, {"balance": new_balance})
+        } catch (error) {
+            throw Error(`Unable to update balance for user with id: ${user_id}.`)
+        }
     }
 }
