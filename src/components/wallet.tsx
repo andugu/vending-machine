@@ -49,9 +49,6 @@ export const Wallet = () => {
 	const handleRefundClick = () => {
 		setBalance(0);
 	};
-	const handleLogoutClick = () => {
-		logout();
-	};
 
 	if (error) {
 		return MainMessage(error, MessageColorByType.ERROR);
@@ -83,7 +80,7 @@ export const Wallet = () => {
 					{LargeGreenButton("Refund money", handleRefundClick)}
 				</Box>
 				<Box sx={{mt: 3}}>
-					{LargeDarkBlueButton("Logout", handleLogoutClick)}
+					{LargeDarkBlueButton("Logout", logout)}
 				</Box>
 			</Box>
 		</Box>
