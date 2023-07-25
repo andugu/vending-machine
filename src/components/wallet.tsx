@@ -1,11 +1,14 @@
+import {useDispatch, useSelector} from "react-redux";
 import Box from '@mui/material/Box';
 import Grid from "@mui/material/Grid";
-import {useSelector} from "react-redux";
 
 import {RootState} from "../store";
+import {api} from "../api";
 import {LargeBlueButton, LargeDarkBlueButton, LargeGreenButton} from "./common";
+import {updateBalance} from "../redux/walletSlice";
+import {RechargeOptionsType} from "../types";
 
-const RechargeOptions = {
+const RechargeOptions: RechargeOptionsType = {
 	"0,10€": 0.1,
 	"0,20€": 0.2,
 	"0,50€": 0.5,
@@ -15,9 +18,23 @@ const RechargeOptions = {
 }
 
 export const Wallet = () => {
+	const dispatch = useDispatch()
 	const id: string | null = useSelector((state: RootState) => state.wallet.id)
 	const user_name: string | null = useSelector((state: RootState) => state.wallet.user_name)
 	let balance: number | null = useSelector((state: RootState) => state.wallet.balance)
+	const setBalance = (amount: number) => {
+		balance = parseFloat(amount.toFixed(2));
+		api.patchBalance(user_name as string, balance);
+		dispatch(updateBalance(balance));
+	};
+	const handleAddMoneyClick = (amount: number) => {
+		balance = balance as number;
+		balance += amount;
+		setBalance(balance)
+	};
+	const handleRefundClick = () => {
+		setBalance(0);
+	};
 
 	return (
 		<Box sx={{backgroundColor: '#334d5c', borderRadius: 4}}>
@@ -31,7 +48,7 @@ export const Wallet = () => {
 						{Object.keys(RechargeOptions).map((option) => (
 							<Grid item sm={6} md={4}>
 								<Box sx={{p: 1, m:1}}>
-									{LargeBlueButton(option)}
+									{LargeBlueButton(option, () => handleAddMoneyClick(RechargeOptions[option]))}
 								</Box>
 							</Grid>
 						))}
@@ -43,7 +60,7 @@ export const Wallet = () => {
 					</Box>
 				</Box>
 				<Box sx={{mt: 3}}>
-					{LargeGreenButton("Refund money")}
+					{LargeGreenButton("Refund money", handleRefundClick)}
 				</Box>
 				<Box sx={{mt: 3}}>
 					{LargeDarkBlueButton("Logout")}
