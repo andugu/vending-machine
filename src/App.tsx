@@ -1,12 +1,11 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Box from "@mui/material/Box";
 
 import {LoginPage} from "./pages/Login";
 import {VendingMachine} from "./pages/VendingMachine";
 import {NotFound} from "./pages/NotFound";
-
 import './App.css';
-import Box from "@mui/material/Box";
 
 function App() {
   return (
