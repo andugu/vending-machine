@@ -24,7 +24,7 @@ export const Wallet = () => {
 	let balance: number | null = useSelector((state: RootState) => state.wallet.balance)
 	const setBalance = (amount: number) => {
 		balance = parseFloat(amount.toFixed(2));
-		api.patchBalance(user_name as string, balance);
+		api.patchBalance(id as string, balance);
 		dispatch(updateBalance(balance));
 	};
 	const handleAddMoneyClick = (amount: number) => {
