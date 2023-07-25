@@ -28,11 +28,11 @@ export const Login = () => {
 			setError(`An error occurred on log in: ${error}\nPlease, refresh the page and try again.`);
 		}
 	};
-
 	const handleSubmitClick = () => {
 		fetchUserInfo();
 		return <Navigate to='/products' />
 	};
+
 	if (error) {
 		return MainMessage(error, MessageColorByType.ERROR);
 	}
