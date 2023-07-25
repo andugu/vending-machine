@@ -30,9 +30,9 @@ export const Wallet = () => {
 		api.patchBalance(id as string, balance);
 		dispatch(updateBalance(balance));
 	};
-	const logout = async () => {
+	const logout = () => {
 		try {
-			await api.logout();
+			api.logout();
 			dispatch(setUserId(null));
 			dispatch(setUserName(null));
 			dispatch(updateBalance(null));
