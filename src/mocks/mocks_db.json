@@ -96,6 +96,7 @@
     "user_name": "Josep Maria Olive Fernandez",
     "balance": 23
   },
+  "logout": {},
   "profile": {
     "balance": 0
   }
