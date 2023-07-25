@@ -15,5 +15,10 @@
     {"id": "product-13", "name": "Coca Cola Zero", "quantity": "4", "price": "5000"},
     {"id": "product-14", "name": "Oreo cookies", "quantity": "3", "price": "5000"},
     {"id": "product-15", "name": "Coca Cola", "quantity": "4", "price": "10000"}
-  ]
+  ],
+  "login": {
+    "user_name": "goatsep",
+    "full_name": "Josep Maria Olive Fernandez",
+    "balance": 23
+  }
 }

@@ -1,1 +1,0 @@
-json-server --watch src/mocks/mocks_db.json --port 8000
