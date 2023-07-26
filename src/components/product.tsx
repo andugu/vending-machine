@@ -5,8 +5,41 @@ import {FC, useEffect, useState} from 'react';
 import {api} from "../api";
 import {ProductProps} from "../types";
 import {LargeBlueButton, MainMessage, MessageColorByType} from "./common";
+import {useDispatch, useSelector} from "react-redux";
+import {RootState} from "../store";
+import { updateBalance } from "../redux/walletSlice";
 
-const Product = ({ id, name, quantity, price }: ProductProps) => {
+interface ProductCompProps extends ProductProps {
+  handlePurchase: () => void;
+}
+
+const Product = ({ id, name, quantity, price, handlePurchase }: ProductCompProps) => {
+	const [buttonText, setButtonText] = useState('Buy');
+	const dispatch = useDispatch()
+	let balance = useSelector((state: RootState) => state.wallet.balance) as number;
+	const buyProduct = () => {
+		if (quantity <= 0) {
+			setButtonText("Unable to buy product, no stock left.");
+			return
+		} else if (price > balance) {
+			setButtonText("Unable to buy product, insufficient balance.");
+			return
+		}
+		try {
+			api.buy(id);
+			balance -= price;
+			balance = parseFloat(balance.toFixed(2));
+			dispatch(updateBalance(balance));
+			quantity -= 1;
+			handlePurchase();
+		} catch (error) {
+			setButtonText(`An error occurred while trying to buy the product: ${error}`);
+		}
+	};
+	const handleBuyClick = () => {
+		buyProduct();
+	};
+
 	return (
 		<Box>
 			<Box sx={{backgroundColor: '#d5d5d5', p: 1, m:1, borderRadius: 2}}>
@@ -17,7 +50,7 @@ const Product = ({ id, name, quantity, price }: ProductProps) => {
 				</Box>
 			</Box>
 			<Box sx={{p: 1, m:1}}>
-				{LargeBlueButton("Buy")}
+				{LargeBlueButton(buttonText, handleBuyClick)}
 			</Box>
 		</Box>
 	)
@@ -35,6 +68,14 @@ export const Products: FC = () => {
 			setError(`An error occurred while loading products: ${error}`);
 		}
 	};
+	const handlePurchase = (product_id: string) => {
+		if (products) {
+			const updatedProducts = products.map((product) =>
+				product.id === product_id ? { ...product, quantity: product.quantity - 1 } : product
+			);
+			setProducts(updatedProducts);
+		}
+	};
 
 	useEffect(() => {
 		if (products === null) {
@@ -44,7 +85,7 @@ export const Products: FC = () => {
 
 	if (error) {
 		return MainMessage(error, MessageColorByType.ERROR);
-	} else if (products != null) {
+	} else if (products !== null) {
 		return (
 			<Box sx={{
 				backgroundColor: '#334d5c',
@@ -55,7 +96,7 @@ export const Products: FC = () => {
 				<Grid container rowSpacing={4} columnSpacing={{xs: 1, sm: 1, md: 3}}>
 					{products.map( (product: ProductProps) => (
 						<Grid item xs={6} sm={4}>
-							<Product id={product.id} name={product.name} quantity={product.quantity} price={product.price} />
+							<Product id={product.id} name={product.name} quantity={product.quantity} price={product.price} handlePurchase={() => {handlePurchase(product.id)}}/>
 						</Grid>
 					))}
 				</Grid>
