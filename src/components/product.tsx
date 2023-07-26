@@ -96,7 +96,13 @@ export const Products: FC = () => {
 				<Grid container rowSpacing={4} columnSpacing={{xs: 1, sm: 1, md: 3}}>
 					{products.map( (product: ProductProps) => (
 						<Grid item xs={6} sm={4}>
-							<Product id={product.id} name={product.name} quantity={product.quantity} price={product.price} handlePurchase={() => {handlePurchase(product.id)}}/>
+							<Product
+								id={product.id}
+								name={product.name}
+								quantity={product.quantity}
+								price={product.price}
+								handlePurchase={() => {handlePurchase(product.id)}}
+							/>
 						</Grid>
 					))}
 				</Grid>
