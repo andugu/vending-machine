@@ -55,6 +55,7 @@
     "@playwright/test": "^1.36.2",
     "@types/react-router-dom": "^5.3.3",
     "eslint-plugin-no-lookahead-lookbehind-regexp": "^0.3.0",
-    "eslint-plugin-playwright": "^0.15.3"
+    "eslint-plugin-playwright": "^0.15.3",
+    "jest": "^27.5.1"
   }
 }
