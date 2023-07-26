@@ -97,6 +97,7 @@
     "balance": 23
   },
   "logout": {},
+  "buy": {},
   "profile": {
     "balance": 0
   }
