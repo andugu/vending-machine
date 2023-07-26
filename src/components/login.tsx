@@ -21,9 +21,13 @@ export const Login = () => {
 	const fetchUserInfo = async () => {
 		try {
 			let user = await api.login(textFieldValue);
-			dispatch(setUserId(user.id));
-			dispatch(setUserName(user.user_name));
-			dispatch(updateBalance(user.balance));
+			if (user.id === null) {
+				setError("Invalid user credentials. Please, refresh the page and try again.");
+			} else {
+				dispatch(setUserId(user.id));
+				dispatch(setUserName(user.user_name));
+				dispatch(updateBalance(user.balance));
+			}
 		} catch (error) {
 			setError(`An error occurred on log in: ${error}\nPlease, refresh the page and try again.`);
 		}
