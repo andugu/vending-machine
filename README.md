@@ -1,5 +1,5 @@
 # 🎰 Vending Machine
-This project replicates the front end of a vending machine using `React Native`, `Material UI`, `Redux` and `React Router`. It also includes a mocked BE build with `json-server`.<br><br>
+This project replicates the front end of a vending machine using `React`, `Material UI`, `Redux` and `React Router`. It also includes a mocked BE build with `json-server`.<br><br>
 
 ## 🏛 Architecture
     /src
