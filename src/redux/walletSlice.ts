@@ -21,9 +21,14 @@ export const walletSlice = createSlice({
         },
         updateBalance: (state, action: PayloadAction<number | null>) => {
             state.balance = action.payload
+        },
+        resetState: (state) => {
+            state.id = initialState.id;
+            state.user_name = initialState.user_name;
+            state.balance = initialState.balance;
         }
     }
 });
 
-export const { setUserId, setUserName, updateBalance } = walletSlice.actions;
+export const { setUserId, setUserName, updateBalance, resetState } = walletSlice.actions;
 export const walletReducer = walletSlice.reducer;
