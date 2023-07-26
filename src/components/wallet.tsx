@@ -7,7 +7,7 @@ import Grid from "@mui/material/Grid";
 import {RootState} from "../store";
 import {api} from "../api";
 import {LargeBlueButton, LargeDarkBlueButton, LargeGreenButton, MainMessage, MessageColorByType} from "./common";
-import {setUserId, setUserName, updateBalance} from "../redux/walletSlice";
+import { updateBalance, resetState } from "../redux/walletSlice";
 import {RechargeOptionsType} from "../types";
 
 const RechargeOptions: RechargeOptionsType = {
@@ -33,9 +33,7 @@ export const Wallet = () => {
 	const logout = () => {
 		try {
 			api.logout();
-			dispatch(setUserId(null));
-			dispatch(setUserName(null));
-			dispatch(updateBalance(null));
+			dispatch(resetState());
 			return <Navigate to='/' replace={true}/>
 		} catch (error) {
 			setError(`An error occurred on log out: ${error}\nPlease, refresh the page and try again.`);
