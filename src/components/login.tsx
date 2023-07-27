@@ -26,7 +26,9 @@ export const Login = () => {
 			} else {
 				dispatch(setUserId(user.id));
 				dispatch(setUserName(user.user_name));
-				dispatch(updateBalance(user.balance));
+				let balance = user.balance;
+				if (typeof balance === "string"){balance = parseFloat(balance)}
+				dispatch(updateBalance(balance));
 			}
 		} catch (error) {
 			setError(`An error occurred on log in: ${error}\nPlease, refresh the page and try again.`);
