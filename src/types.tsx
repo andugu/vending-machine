@@ -1,7 +1,7 @@
 export interface UserProps {
     id: string | null;
     user_name: string | null;
-    balance: number | null;
+    balance: number | string | null;
 }
 
 export interface ProductProps {
