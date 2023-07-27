@@ -24,7 +24,7 @@ export const Wallet = () => {
 	const dispatch = useDispatch()
 	const id: string | null = useSelector((state: RootState) => state.wallet.id)
 	const user_name: string | null = useSelector((state: RootState) => state.wallet.user_name)
-	let balance: number | null = useSelector((state: RootState) => state.wallet.balance)
+	let balance: number | string | null = useSelector((state: RootState) => state.wallet.balance)
 	const setBalance = (amount: number) => {
 		balance = parseFloat(amount.toFixed(2));
 		api.patchBalance(id as string, balance);
