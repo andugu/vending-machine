@@ -18,7 +18,10 @@ const Product = ({ id, name, quantity, price, handlePurchase }: ProductCompProps
 	const dispatch = useDispatch()
 	let balance = useSelector((state: RootState) => state.wallet.balance) as number;
 	const buyProduct = () => {
-		if (quantity <= 0) {
+		if (id === undefined) {
+			setButtonText("Unavailable product.");
+			return
+		} else if (quantity <= 0) {
 			setButtonText("Unable to buy product, no stock left.");
 			return
 		} else if (price > balance) {
